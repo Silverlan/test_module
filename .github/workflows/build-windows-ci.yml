@@ -5,7 +5,7 @@ on:
 
 jobs:
   call-workflow:
-    uses: Silverlan/pragma/.github/workflows/build-module.yml@main
+    uses: Silverlan/test_module/.github/workflows/build-module.yml@main
     if: github.repository != 'Silverlan/pr_module_template'
     with:
       repository: '${{ github.repository }}'
