@@ -29,7 +29,7 @@ jobs:
             authHeader="-H \"Authorization: token ${token}\""
           fi
 
-          curl $authHeader -H "Accept: application/vnd.github.v3.raw" -o pragma_module_info.json https://api.github.com/repos/Silverlan/test_module/contents/.github/pragma_module_info.json
+          curl "${authHeader[@]}" -H "Accept: application/vnd.github.v3.raw" -o pragma_module_info.json https://api.github.com/repos/Silverlan/test_module/contents/.github/pragma_module_info.json
           filepath="pragma_module_info.json"
           echo "Module Info:"
           cat $filepath
