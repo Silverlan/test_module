@@ -39,7 +39,7 @@ jobs:
         with:
           repo_access_token: '${{ secrets.repository_token }}'
           #repo_access_token: '${{ secrets.repository_token || github.token }}'
-          repository: '${{ inputs.repository }}/${{ inputs.branch }}'
+          repository: 'Silverlan/test_module'
 
       - name: Build Module
         id: build-module
