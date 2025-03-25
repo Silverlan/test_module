@@ -35,9 +35,10 @@ jobs:
     steps:
       - name: Get Module Info
         id: module-info
-        uses: Silverlan/pr_module_template/github_actions/get_module_info@main
+        uses: Silverlan/test_module/github_actions/get_module_info@main
         with:
-          repo_access_token: '${{ secrets.repository_token || github.token }}'
+          repo_access_token: '${{ secrets.repository_token }}'
+          #repo_access_token: '${{ secrets.repository_token || github.token }}'
           repository: '${{ inputs.repository }}/${{ inputs.branch }}'
 
       - name: Build Module
