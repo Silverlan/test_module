@@ -22,7 +22,7 @@ jobs:
     steps:
       - name: Get Module Info
         id: module-info
-        uses: Silverlan/test_module/github_actions/get_module_info@main
+        uses: Silverlan/pr_module_template/github_actions/get_module_info@main
         with:
           repo_access_token: '${{ github.token }}'
           repository: 'Silverlan/test_module'
