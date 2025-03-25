@@ -20,6 +20,13 @@ jobs:
         config:
           - os: 'ubuntu-24.04'
     steps:
+      - name: Get Module Info
+        id: module-info
+        uses: Silverlan/test_module/github_actions/get_module_info@main
+        with:
+          repo_access_token: '${{ github.token }}'
+          repository: 'Silverlan/test_module'
+
       - name: Create Release Files
         shell: bash
         run: |
@@ -28,7 +35,7 @@ jobs:
           if [ -n "$token" ]; then
             authHeader="-H \"Authorization: token ${token}\""
           fi
-          curl -H "Authorization: token ${token}" -H "Accept: application/vnd.github.v3.raw" -o pragma_module_info.json https://api.github.com/repos/Silverlan/test_module/contents/.github/pragma_module_info.json
+          #curl -H "Authorization: token ${token}" -H "Accept: application/vnd.github.v3.raw" -o pragma_module_info.json https://api.github.com/repos/Silverlan/test_module/contents/.github/pragma_module_info.json
           #curl "${authHeader[@]}" -H "Accept: application/vnd.github.v3.raw" -o pragma_module_info.json https://api.github.com/repos/Silverlan/test_module/contents/.github/pragma_module_info.json
           filepath="pragma_module_info.json"
           echo "Module Info:"
