@@ -23,7 +23,7 @@ jobs:
       - name: Create Release Files
         shell: bash
         run: |
-          curl https://${{ github.token }}@raw.githubusercontent.com/Silverlan/test_module/.github/pragma_module_info.json -o pragma_module_info.json
+          curl https://${{ github.token }}@raw.githubusercontent.com/Silverlan/test_module/main/.github/pragma_module_info.json -o pragma_module_info.json
           filepath="pragma_module_info.json"
           echo "Module Info:"
           cat $filepath
