@@ -53,6 +53,17 @@ jobs:
         shell: bash
         id: parse-args
         run: |
+          if [ -z "${{ secrets.build_token1 }}" ]; then
+            echo "build_token1 is not set"
+          else
+            echo "build_token1 is set"
+          fi
+          if [ -z "${{ secrets.build_token2 }}" ]; then
+            echo "build_token2 is not set"
+          else
+            echo "build_token2 is set"
+          fi
+
           args="${{ inputs.build-args }}"
           new_args=$(sed -e "s/TOKEN1/${{ secrets.build_token1 || '' }}/g" \
                         -e "s/TOKEN2/${{ secrets.build_token2 || '' }}/g" \
