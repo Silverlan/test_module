@@ -10,7 +10,9 @@ jobs:
     with:
       repository: '${{ github.repository }}'
       os: windows
+      build-args: '--token=TOKEN1'
     secrets:
       repository_token: ${{ secrets.GITHUB_TOKEN }}
+      build_token1: 'test'
     permissions:
       contents: write

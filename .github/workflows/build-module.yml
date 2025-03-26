@@ -11,8 +11,17 @@ on:
       os:
         type: string
         required: true
+      build-args:
+        type: string
+        default: ''
     secrets:
       repository_token:
+        required: false
+      build_token1:
+        required: false
+      build_token2:
+        required: false
+      build_token3:
         required: false
 
 permissions:
@@ -35,12 +44,21 @@ jobs:
     steps:
       - name: Get Module Info
         id: module-info
-        uses: Silverlan/test_module/github_actions/get_module_info@main
+        uses: Silverlan/pr_module_template/github_actions/get_module_info@main
         with:
-          repo_access_token: '${{ secrets.repository_token }}'
-          #repo_access_token: '${{ secrets.repository_token || github.token }}'
-          #repository: 'Silverlan/test_module'
+          repo_access_token: '${{ secrets.repository_token || github.token }}'
           repository: '${{ inputs.repository }}'
+
+      - name: Parse Args
+        shell: bash
+        id: parse-args
+        run: |
+          args="${{ inputs.build-args }}"
+          new_args=$(sed -e "s/TOKEN1/${{ secrets.build_token1 || '' }}/g" \
+                        -e "s/TOKEN2/${{ secrets.build_token2 || '' }}/g" \
+                        -e "s/TOKEN3/${{ secrets.build_token3 || '' }}/g" <<< "$text")
+
+          echo "build-args=$new_args" >> $GITHUB_OUTPUT
 
       - name: Build Module
         id: build-module
@@ -51,6 +69,7 @@ jobs:
           token: '${{ secrets.repository_token || github.token }}'
           ref: '${{ inputs.branch }}'
           debug-artifact-token: '${{ secrets.GITHUB_TOKEN }}'
+          build-args: '${{ steps.parse-args.outputs.build-args }}'
 
       - name: Create Release Files
         shell: bash
