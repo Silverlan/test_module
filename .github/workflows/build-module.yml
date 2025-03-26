@@ -66,12 +66,9 @@ jobs:
 
           args="${{ inputs.build-args }}"
           echo "old_args: $args"
-          #new_args=$(sed -e "s/BUILD_TOKEN1/${{ secrets.build_token1 || '' }}/g" \
-          #              -e "s/BUILD_TOKEN2/${{ secrets.build_token2 || '' }}/g" \
-          #              -e "s/BUILD_TOKEN3/${{ secrets.build_token3 || '' }}/g" <<< "$text")
-          new_args=$(sed -e "s/BUILD_TOKEN1/123/g" \
-                        -e "s/BUILD_TOKEN2/456/g" \
-                        -e "s/BUILD_TOKEN3/789/g" <<< "$text")
+          new_args=$(sed -e "s/BUILD_TOKEN1/${{ secrets.build_token1 || '' }}/g" \
+                        -e "s/BUILD_TOKEN2/${{ secrets.build_token2 || '' }}/g" \
+                        -e "s/BUILD_TOKEN3/${{ secrets.build_token3 || '' }}/g" <<< "$args")
 
           echo "new_args: $new_args"
           echo "build-args=$new_args" >> $GITHUB_OUTPUT
